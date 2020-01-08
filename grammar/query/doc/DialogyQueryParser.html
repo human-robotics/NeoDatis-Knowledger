@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Grammar grammar/query/query.g</TITLE>
+</HEAD>
+<BODY>
+<table summary="" border="1" cellpadding="5">
+<tr>
+<td>
+<font size="+2">Grammar DialogyQueryParser</font><br>
+<a href="http://www.ANTLR.org">ANTLR</a>-generated HTML file from grammar/query/query.g
+<p>
+Terence Parr, <a href="http://www.magelang.com">MageLang Institute</a>
+<br>ANTLR Version 2.7.5 (20050128); 1989-2005
+</td>
+</tr>
+</table>
+<PRE>
+
+/**
+
+select x where x.name = &#039;oli%&#039;
+
+query = &#039;select&#039; variable &#039;where&#039; complex-expression
+complex-expression = ( or-expression | and-expression | simple-expression )
+simple-expression = ( variable &#039;.&#039; property &#039;=&#039; value | variable connector value
+or-expression = complex-expression &#039;or&#039; complex-expression
+
+*/
+Definition of parser DialogyQueryParser, which is a subclass of LLkParser.
+
+
+<a name="queries">queries</a>
+	:	( <a href="DialogyQueryParser.html#query">query</a> )+ 
+	;
+
+
+<a name="query">query</a>
+	:	SELECT <a href="DialogyQueryParser.html#identifier">identifier</a> WHERE <a href="DialogyQueryParser.html#complexExpression">complexExpression</a> SEMI 
+	;
+
+
+<a name="identifier">identifier</a>
+	:	IDENTIFIER 
+	;
+
+
+<a name="complexExpression">complexExpression</a>
+	:	<a href="DialogyQueryParser.html#simpleExpression">simpleExpression</a> 
+		(	<a href="DialogyQueryParser.html#orExpression">orExpression</a> 
+		|	<a href="DialogyQueryParser.html#andExpression">andExpression</a> 
+		)* 
+	;
+
+
+<a name="simpleExpression">simpleExpression</a>
+	:	(	LPAREN 
+		|	
+		) 
+		<a href="DialogyQueryParser.html#property">property</a> 
+		(	(	EQUAL 
+			|	IS 
+			) 
+			<a href="DialogyQueryParser.html#identifier">identifier</a> 
+		|	<a href="DialogyQueryParser.html#identifier">identifier</a> <a href="DialogyQueryParser.html#identifier">identifier</a> 
+		) 
+		(	RPAREN 
+		|	
+		) 
+		
+	;
+
+
+<a name="orExpression">orExpression</a>
+	:	OR 
+		(	LPAREN 
+		|	
+		) 
+		<a href="DialogyQueryParser.html#complexExpression">complexExpression</a> 
+		(	RPAREN 
+		|	
+		) 
+		
+	;
+
+
+<a name="andExpression">andExpression</a>
+	:	AND 
+		(	LPAREN 
+		|	
+		) 
+		<a href="DialogyQueryParser.html#complexExpression">complexExpression</a> 
+		(	RPAREN 
+		|	
+		) 
+		
+	;
+
+
+<a name="property">property</a>
+	:	IDENTIFIER ( POINT IDENTIFIER )* 
+	;
+
+</PRE>
+</BODY>
+</HTML>

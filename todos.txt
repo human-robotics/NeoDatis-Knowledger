@@ -1,0 +1,48 @@
+diminuir a força de repulsão - ok
+verificar a persistência - ok
+Não mostrar Object 
+tirar o log de System.getProperty("user.dir") em createWebIcon -
+IS-CONENCTED-TO EM portugues
+tirar o tab de query
+traduzir concept.have.box e instance.have.box OK
+Cor dos conectores++ OK
+
+conectores padrões : usar plugin
+
+
+
+posição de um nov oconceito qdo criado
+
+
+/////////
+The ForceDirectedLayout class will build the association between VisualItems and ForceItems for you. To set custom node mass values, simply override the method getMassValue(NodeItem n). There are similar methods you can override to set custom spring parameters. 
+ 
+hope that helps! 
+-jeff 
+//////////
+
+
+
+//////////
+If I'm understanding the question right, you can do this by configuring the renderer factory, to use different renderers depending on the current setup. For example: 
+ 
+Renderer r1 = new ShapeRenderer(); 
+Renderer r2 = new LabelRenderer(labelField); 
+ 
+DefaultRendererFactory rf = 
+new DefaultRendererFactory(r1); 
+rf.add(VisualItem.HIGHLIGHT, r2); 
+visualization.setRendererFactory(rf); 
+ 
+This will cause the label renderer to be used only when the HIGHLIGHT flag is true. Otherwise, the shape renderer is used. 
+ 
+-jeff 
+/////////////
+
+///////////////
+to get nodeItem from node
+Node n; // the referenced node 
+int row = n.getRow(); 
+Table t = (Table)vis.getGroup("graph.nodes"); 
+NodeItem ni = (NodeItem)t.getTuple(row); 
+ /////////////

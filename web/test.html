@@ -1,0 +1,37 @@
+<html>
+<body>
+
+<h1>Neodatis knowledger Remote Test</h1>
+<br>
+
+
+
+
+<form action="/knowledger/request" method="get">
+<table>
+<tr>
+	<td>Acao</td>
+	<td>
+	<select name="action" size="1">
+		<option value="get-bases" >get-bases</option>
+		<option value="create-base" >get-accumulated-data</option>
+		<option value="open.base" >load ODB Base</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td>ODB Base Name</td>
+	<td><input type="text" name="base.name" size="30" value= "all"></td>
+	<td>.odb extension</td>
+</tr>
+</table>
+<div align="center">
+<input type="submit" name="go" value="go" size="4">
+</div>
+</form>
+
+
+
+
+</body>
+</html>

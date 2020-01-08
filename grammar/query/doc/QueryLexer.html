@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Grammar grammar/query/query.g</TITLE>
+</HEAD>
+<BODY>
+<table summary="" border="1" cellpadding="5">
+<tr>
+<td>
+<font size="+2">Grammar QueryLexer</font><br>
+<a href="http://www.ANTLR.org">ANTLR</a>-generated HTML file from grammar/query/query.g
+<p>
+Terence Parr, <a href="http://www.magelang.com">MageLang Institute</a>
+<br>ANTLR Version 2.7.5 (20050128); 1989-2005
+</td>
+</tr>
+</table>
+<PRE>
+
+Definition of lexer QueryLexer, which is a subclass of CharScanner.
+
+/** Lexer nextToken rule:
+ *  The lexer nextToken rule is synthesized from all of the user-defined
+ *  lexer rules.  It logically consists of one big alternative block with
+ *  each user-defined rule being an alternative.
+ */
+<a href="QueryLexer.html#mIDENTIFIER">mIDENTIFIER</a> 
+|	<a href="QueryLexer.html#mLPAREN">mLPAREN</a> 
+|	<a href="QueryLexer.html#mRPAREN">mRPAREN</a> 
+|	<a href="QueryLexer.html#mLCURLY_BRACE">mLCURLY_BRACE</a> 
+|	<a href="QueryLexer.html#mRCURLY_BRACE">mRCURLY_BRACE</a> 
+|	<a href="QueryLexer.html#mEQUAL">mEQUAL</a> 
+|	<a href="QueryLexer.html#mCOMMA">mCOMMA</a> 
+|	<a href="QueryLexer.html#mSEMI">mSEMI</a> 
+|	<a href="QueryLexer.html#mPOINT">mPOINT</a> 
+|	<a href="QueryLexer.html#mWS">mWS</a> 
+<a name="mIDENTIFIER">mIDENTIFIER</a>
+	:	(				'a'..'z' 
+		|				'A'..'Z' 
+		|				'0'..'9' 
+		|	&#039;_&#039; 
+		|	&#039;-&#039; 
+		|	&#039;$&#039; 
+		|	&#039;#&#039; 
+		|	&#039;%&#039; 
+		)+ 
+	;
+
+<a name="mLPAREN">mLPAREN</a>
+	:	&#039;(&#039; 
+	;
+
+<a name="mRPAREN">mRPAREN</a>
+	:	&#039;)&#039; 
+	;
+
+<a name="mLCURLY_BRACE">mLCURLY_BRACE</a>
+	:	&#039;{&#039; 
+	;
+
+<a name="mRCURLY_BRACE">mRCURLY_BRACE</a>
+	:	&#039;}&#039; 
+	;
+
+<a name="mEQUAL">mEQUAL</a>
+	:	&#039;=&#039; 
+	;
+
+<a name="mCOMMA">mCOMMA</a>
+	:	&#039;,&#039; 
+	;
+
+<a name="mSEMI">mSEMI</a>
+	:	&#039;;&#039; 
+	;
+
+<a name="mPOINT">mPOINT</a>
+	:	&#039;.&#039; 
+	;
+
+<a name="mWS">mWS</a>
+	:	(	&#039; &#039; 
+		|	&#039;\r&#039; &#039;\n&#039; 
+		|	&#039;\n&#039; 
+		|	&#039;\t&#039; 
+		) 
+		
+	;

@@ -1,0 +1,148 @@
+<project default="main" basedir=".." name="NeoDatis - Knowledger">
+
+	<property name="src" value="src" />
+	<property name="lib" value="lib" />
+	<property name="dist" value="dist" />
+	<property name="web" value="web" />
+	<property name="bin" value="bin" />
+	<property name="conf" value="conf" />
+	<property name="images" value="images" />	
+	<property name="xml" value="xml" />
+	<property name="graph.grammar.file" value="grammar/graph2.g" />
+	<property name="graph.parser.src.dir" value="${src}/org/neodatis/knowledger/graph/parser" />
+
+	<property name="deploy.dir" value="c:/o/prog/apache-tomcat-5.5.20/webapps" />
+
+	<path id="xdoclet.lib.classpath" description="Hibernate xdoclet classpath">
+		<fileset dir="${lib.xdoclet}" />
+		<fileset dir="${lib}" />
+	</path>
+
+	<path id="compile.classpath" description="Application classpath">
+		<fileset dir="${lib}" />
+		<fileset dir="${dist}" />
+	</path>
+
+
+	<!-- Main -->
+	<target name="main" depends="war" />
+
+
+	<!-- Init -->
+	<target name="init" depends="initBuildNumber">
+		<echo message="Java Version ${java.version}" />
+		<delete dir="${bin}" verbose="true" />
+		<delete dir="${dist}" verbose="true" />
+		<mkdir dir="${bin}" />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<target name="initBuildNumber">
+
+		<echo>Executing init build number   : ${build.time}</echo>
+
+		<tstamp>
+			<format property="build.time" pattern="dd/MM/yyyy HH:mm:ss" />
+		</tstamp>
+		
+		<buildnumber />
+
+		<echo>Build time : ${build.time}</echo>
+		<echo>Build Number : ${build.number}</echo>
+
+		<copy file="template/release-template.txt" tofile="src/org/neodatis/knowledger/core/Release.java" overwrite="true" />
+		<replace file="src/org/neodatis/knowledger/core/Release.java" token="build" value="${build.number}"/>
+		<replace file="src/org/neodatis/knowledger/core/Release.java" token="date" value="${build.time}"/>
+	</target>
+
+
+	<!-- Compile -->
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${bin}" classpathref="compile.classpath" debug="true" />
+	</target>
+
+
+	<!-- Jar -->
+	<target name="jar" depends="compile">
+		<copy todir="${bin}" >
+			<fileset dir="${conf}" includes="messages_*.properties"/>
+		</copy>
+		<copy file="build.number" todir="${bin}" />
+		<jar destfile="${dist}/knowledger.jar" basedir="${bin}" />
+	</target>
+
+	<target name="war" depends="jar,package-war">
+	</target>
+	<target name="package-war" >
+			<mkdir dir="${web}/WEB-INF/lib" />
+			<mkdir dir="${web}/WEB-INF/classes" />
+			<copy todir="${web}/WEB-INF/classes" >
+				<fileset dir="${conf}" includes="messages_*.properties"/>
+			</copy>
+			<copy todir="${web}/images" >
+				<fileset dir="${images}"/>
+			</copy>
+
+			<copy file="${dist}/knowledger.jar" todir="${web}/WEB-INF/lib" />
+			<copy todir="${web}/WEB-INF/lib">
+				<fileset dir="${lib}" excludes="servlet*" />
+			</copy>
+			<jar destfile="${dist}/knowledger.war" basedir="${web}" />
+			<copy file="${dist}/knowledger.war" todir="${deploy.dir}" />
+		</target>
+
+	<target name="antlr">
+
+		<!--<antlr target="${graph.grammar.file}" html="true" outputdirectory="${graph.parser.src.dir}" />-->
+		<exec executable="${basedir}/grammar/compile-graph-grammar.bat" os="Windows 2000,Windows XP" />
+		<exec executable="${shell.program}" os="Linux">
+			<arg line=" ${basedir}/grammar/compile-graph-grammar.bat" />
+		</exec>
+	</target>
+
+	<target name="send" description="to send the whole package">
+
+		<delete dir="${bin}"/>
+		<mkdir dir="${bin}"/>	
+
+		<tstamp>
+			<format property="simple.build.time" pattern="yyyy-MM-dd" />
+		</tstamp>
+
+		<property name="dir" value="neodatis-knowledger-${simple.build.time}"/>
+
+		<delete dir="${dir}" />
+		<mkdir dir="${dir}" />
+		<delete file="dist/*.zip" />
+		<mkdir dir="${dir}/lib" />
+		<mkdir dir="${dir}/dist" />
+		<mkdir dir="${dir}/doc" />
+		<mkdir dir="${dir}/doc/src" />
+		
+		<javac srcdir="tutorial" destdir="${bin}" classpathref="compile.classpath" debug="true" />
+		<jar destfile="${dir}/doc/tutorial.jar" basedir="${bin}"/>
+
+
+		<copy todir="${dir}" file="build.number" />
+		<copy todir="${dir}" file="doc/readme.txt" />
+		<copy todir="${dir}/lib" file="lib/antlr-2.7.5.jar" />
+		<copy todir="${dir}/lib" file="lib/junit.jar" />
+		<copy todir="${dir}/lib" file="lib/neodatis-odb.jar" />
+		<copy todir="${dir}/lib" file="lib/odb-remote.war" />
+		<copy todir="${dir}/lib" file="lib/neodatis-odb-remote.jar" />
+		<copy todir="${dir}/lib" file="lib/prefuse.jar" />
+		<copy todir="${dir}/lib" file="lib/log4j-1.2.8.jar" />
+		<copy todir="${dir}" file="dist/knowledger.jar" />
+		<copy todir="${dir}" file="dist/knowledger.war" />
+		<copy tofile="${dir}/explorer.bat" file="bat/explorer-dist.bat" />
+		<copy tofile="${dir}/doc/tutorial.bat" file="bat/tutorial-dist.bat" />
+		<copy todir="${dir}/doc/src">
+			<fileset dir="tutorial" />
+		</copy>
+		<copy todir="${dir}/doc" file="../doc/NeoDatisKnowledger.pdf"/>
+
+		<jar destfile="dist/${dir}.zip" basedir="." includes="${dir}/**" />
+		<delete dir="${dir}" includeemptydirs="true" />
+
+	</target>
+</project>

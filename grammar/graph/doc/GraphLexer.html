@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Grammar grammar/graph/graph.g</TITLE>
+</HEAD>
+<BODY>
+<table summary="" border="1" cellpadding="5">
+<tr>
+<td>
+<font size="+2">Grammar GraphLexer</font><br>
+<a href="http://www.ANTLR.org">ANTLR</a>-generated HTML file from grammar/graph/graph.g
+<p>
+Terence Parr, <a href="http://www.magelang.com">MageLang Institute</a>
+<br>ANTLR Version 2.7.5 (20050128); 1989-2005
+</td>
+</tr>
+</table>
+<PRE>
+
+Definition of lexer GraphLexer, which is a subclass of CharScanner.
+
+/** Lexer nextToken rule:
+ *  The lexer nextToken rule is synthesized from all of the user-defined
+ *  lexer rules.  It logically consists of one big alternative block with
+ *  each user-defined rule being an alternative.
+ */
+<a href="GraphLexer.html#mLSQUARE_BRACE">mLSQUARE_BRACE</a> 
+|	<a href="GraphLexer.html#mRSQUARE_BRACE">mRSQUARE_BRACE</a> 
+|	<a href="GraphLexer.html#mLPAREN">mLPAREN</a> 
+|	<a href="GraphLexer.html#mRPAREN">mRPAREN</a> 
+|	<a href="GraphLexer.html#mLCURLY_BRACE">mLCURLY_BRACE</a> 
+|	<a href="GraphLexer.html#mRCURLY_BRACE">mRCURLY_BRACE</a> 
+|	<a href="GraphLexer.html#mLARROW">mLARROW</a> 
+|	<a href="GraphLexer.html#mRARROW">mRARROW</a> 
+|	<a href="GraphLexer.html#mCOMMA">mCOMMA</a> 
+|	<a href="GraphLexer.html#mSTART_CONTEXT">mSTART_CONTEXT</a> 
+|	<a href="GraphLexer.html#mHALF_RARROW">mHALF_RARROW</a> 
+|	<a href="GraphLexer.html#mINSTANCE_PREFIX">mINSTANCE_PREFIX</a> 
+|	<a href="GraphLexer.html#mACTION_PREFIX">mACTION_PREFIX</a> 
+|	<a href="GraphLexer.html#mPROPOSITION_PREFIX">mPROPOSITION_PREFIX</a> 
+|	<a href="GraphLexer.html#mEND_OF_GRAPHS">mEND_OF_GRAPHS</a> 
+|	<a href="GraphLexer.html#mINT">mINT</a> 
+|	<a href="GraphLexer.html#mLETTER">mLETTER</a> 
+|	<a href="GraphLexer.html#mWS">mWS</a> 
+<a name="mLSQUARE_BRACE">mLSQUARE_BRACE</a>
+	:	&#039;[&#039; 
+	;
+
+<a name="mRSQUARE_BRACE">mRSQUARE_BRACE</a>
+	:	&#039;]&#039; 
+	;
+
+<a name="mLPAREN">mLPAREN</a>
+	:	&#039;(&#039; 
+	;
+
+<a name="mRPAREN">mRPAREN</a>
+	:	&#039;)&#039; 
+	;
+
+<a name="mLCURLY_BRACE">mLCURLY_BRACE</a>
+	:	&#039;{&#039; 
+	;
+
+<a name="mRCURLY_BRACE">mRCURLY_BRACE</a>
+	:	&#039;}&#039; 
+	;
+
+<a name="mLARROW">mLARROW</a>
+	:	&quot;&lt;-&quot; 
+	;
+
+<a name="mRARROW">mRARROW</a>
+	:	&quot;-&gt;&quot; 
+	;
+
+<a name="mCOMMA">mCOMMA</a>
+	:	&#039;,&#039; 
+	;
+
+<a name="mSTART_CONTEXT">mSTART_CONTEXT</a>
+	:	&#039;-&#039; 
+	;
+
+<a name="mHALF_RARROW">mHALF_RARROW</a>
+	:	&#039;&gt;&#039; 
+	;
+
+<a name="mINSTANCE_PREFIX">mINSTANCE_PREFIX</a>
+	:	&#039;#&#039; 
+	;
+
+<a name="mACTION_PREFIX">mACTION_PREFIX</a>
+	:	&#039;@&#039; 
+	;
+
+<a name="mPROPOSITION_PREFIX">mPROPOSITION_PREFIX</a>
+	:	&#039;$&#039; 
+	;
+
+<a name="mEND_OF_GRAPHS">mEND_OF_GRAPHS</a>
+	:	&#039;.&#039; 
+	;
+
+<a name="mINT">mINT</a>
+	:	( 			'0'..'9' )+ 
+	;
+
+<a name="mLETTER">mLETTER</a>
+	:	( 			'a'..'z' ) 
+	;
+
+<a name="mWS">mWS</a>
+	:	(	&#039; &#039; 
+		|	&#039;\r&#039; &#039;\n&#039; 
+		|	&#039;\n&#039; 
+		|	&#039;\t&#039; 
+		) 
+		
+	;

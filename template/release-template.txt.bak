@@ -1,0 +1,7 @@
+package com.neodatis.knowledger.core;
+
+public class Release {
+	public static String RELEASE_BUILD = "build";
+	public static String RELEASE_DATE = "date";
+
+}

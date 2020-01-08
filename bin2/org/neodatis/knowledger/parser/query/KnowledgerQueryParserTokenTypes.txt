@@ -1,0 +1,18 @@
+// $ANTLR 2.7.5 (20050128): grammar/query/query.g -> KnowledgerQueryParserTokenTypes.txt$
+KnowledgerQueryParser    // output token vocab name
+SELECT="select"=4
+WHERE="where"=5
+SEMI=6
+OR="or"=7
+LPAREN=8
+RPAREN=9
+AND="and"=10
+EQUAL=11
+IS="is"=12
+IDENTIFIER=13
+POINT=14
+NOT="not"=15
+LCURLY_BRACE=16
+RCURLY_BRACE=17
+COMMA=18
+WS=19

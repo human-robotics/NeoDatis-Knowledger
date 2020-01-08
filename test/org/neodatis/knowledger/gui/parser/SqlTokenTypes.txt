@@ -1,0 +1,10 @@
+// $ANTLR 2.7.5 (20050128): query.g -> SqlTokenTypes.txt$
+Sql    // output token vocab name
+LPAREN=4
+RPAREN=5
+LCURLY_BRACE=6
+RCURLY_BRACE=7
+EQUAL=8
+COMMA=9
+POINT=10
+WS=11

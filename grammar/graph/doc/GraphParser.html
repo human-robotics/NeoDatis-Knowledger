@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Grammar grammar/graph/graph.g</TITLE>
+</HEAD>
+<BODY>
+<table summary="" border="1" cellpadding="5">
+<tr>
+<td>
+<font size="+2">Grammar GraphParser</font><br>
+<a href="http://www.ANTLR.org">ANTLR</a>-generated HTML file from grammar/graph/graph.g
+<p>
+Terence Parr, <a href="http://www.magelang.com">MageLang Institute</a>
+<br>ANTLR Version 2.7.5 (20050128); 1989-2005
+</td>
+</tr>
+</table>
+<PRE>
+
+/**
+[#olivier] -&gt; (subject) -&gt; {use} -&gt; (object) -&gt; [#group] -
+	-&gt; (element) -&gt; [#racket] -&gt; (quantity) -&gt; [2]
+	-&gt; (element) -&gt; [#ball] -&gt; (quantity) -&gt; [5]
+	
+	
+	graphs : (oneGraph)*
+
+	oneGraph : node arrow ( connector arrow (node | list-of-right-parts)  )*
+
+	node : &#039;[&#039; (&#039;@&#039;|&#039;$&#039;|&#039;#&#039;)? identifier &#039;]&#039;
+
+	arrow : &#039;-&gt;&#039; | &#039;&lt;-&#039;
+
+	connector : &#039;(&#039; identifier &#039;)&#039;
+
+	list-of-right-parts : &#039;{&#039;  connector arrow (node | list-of-right-parts)  &#039;}&#039;
+
+*/
+Definition of parser GraphParser, which is a subclass of LLkParser.
+
+
+/*************************************************************************************/
+<a name="graphs">graphs</a>
+	:	( <a href="GraphParser.html#oneGraph">oneGraph</a> )+ END_OF_GRAPHS 
+	;
+
+
+/*************************************************************************************/
+<a name="oneGraph">oneGraph</a>
+	:	<a href="GraphParser.html#node">node</a> ( <a href="GraphParser.html#arrow">arrow</a> <a href="GraphParser.html#connector">connector</a> <a href="GraphParser.html#arrow">arrow</a> 
+			(	<a href="GraphParser.html#node">node</a> 
+			|	<a href="GraphParser.html#listOfRightParts">listOfRightParts</a> 
+			) )* 
+	;
+
+
+/*************************************************************************************/
+<a name="node">node</a>
+	:	(	<a href="GraphParser.html#object">object</a> 
+		|	<a href="GraphParser.html#connector">connector</a> 
+		) 
+	;
+
+
+/** Matches an arrow : &quot;-&gt;&quot; or &quot;&lt;-&quot;*/
+<a name="arrow">arrow</a>
+	:	(	LARROW 
+		|	RARROW 
+		|	START_CONTEXT HALF_RARROW 
+		) 
+	;
+
+
+/*************************************************************************************
+ Matches a string between () like (subject). the () are used to indicate connectors   
+ *************************************************************************************/
+<a name="connector">connector</a>
+	:	LPAREN <a href="GraphParser.html#identifier">identifier</a> RPAREN 
+	;
+
+
+
+/*************************************************************************************/
+<a name="completeRelation">completeRelation</a>
+	:	<a href="GraphParser.html#connector">connector</a> <a href="GraphParser.html#arrow">arrow</a> <a href="GraphParser.html#node">node</a> 
+	;
+
+
+/*************************************************************************************
+ Matches an object between [] like [Man] or [#olivier]. 
+ Square braces are used to indicate a concept or an instance.
+  The # means instance. 
+*************************************************************************************/
+<a name="object">object</a>
+	:	LSQUARE_BRACE 
+		(	INSTANCE_PREFIX 
+		|	ACTION_PREFIX 
+		|	PROPOSITION_PREFIX 
+		|	
+		) 
+		<a href="GraphParser.html#identifier">identifier</a> RSQUARE_BRACE 
+	;
+
+
+/** Matches a valid identifier*/
+<a name="identifier">identifier</a>
+	:	(	LETTER 
+		|	INT 
+		)+ 
+	;
+
+
+<a name="listOfParts">listOfParts</a>
+	:	LCURLY_BRACE RCURLY_BRACE 
+	;
+
+</PRE>
+</BODY>
+</HTML>

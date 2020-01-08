@@ -1,0 +1,7 @@
+db
+lib
+*.odb
+bin
+dist
+nbproject
+*.knowledger

@@ -1,0 +1,4 @@
+<jboss-web>
+<context-root>/</context-root>
+<virtual-host>www.knowledger.org</virtual-host>
+</jboss-web>
